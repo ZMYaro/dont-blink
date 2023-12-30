@@ -24,12 +24,24 @@ var angelImage,
 /** {Boolean} Whether the minimum time of the fake loading animation has passed */
 	fakeLoadDone = false,
 /** {Boolean} Whether the image has fully loaded */
-	imageLoaded = false;
+	imageLoaded = false,
+/** {Boolean} Whether the “I don't get it?” button has been clicked at least once */
+	idgiClicked = false;
 
 window.addEventListener('DOMContentLoaded', function () {
 	angelImage = document.getElementById('angel-image');
 	angelCover = document.getElementById('angel-cover');
 	loadImage();
+	
+	document.getElementById('idgi-button').addEventListener('click', function () {
+		var hint = 'Try using different web browsers 😉';
+		if (idgiClicked) {
+			// Point people to information about Blink if they click the button again.
+			hint += '\r\n\r\n(https://developer.mozilla.org/docs/Glossary/Blink)';
+		}
+		alert(hint);
+		idgiClicked = true;
+	})
 });
 
 /**

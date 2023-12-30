@@ -15,12 +15,28 @@ body {
 	color: white;
 }
 
-a {
+a,
+#idgi-button {
 	color: #88ddff;
 }
-	a:active {
+	a:active,
+	#idgi-button:active {
 		color: #f05555;
 	}
+#idgi-button {
+	/* Looks like the other footer links. */
+	appearance: none;
+	display: inline;
+	font-family: inherit;
+	font-size: inherit;
+	background: transparent;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	
+	text-decoration: underline;
+	cursor: pointer;
+}
 
 #angel-image {
 	width: 100%;
