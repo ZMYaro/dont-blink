@@ -74,14 +74,14 @@ footer {
 	#angel-cover.reveal-partial {
 		animation-duration: 5s;
 		animation-timing-function: linear;
-		animation-name: fake-reveal;
+		animation-name: fake-load;
 		height: 91%;
 	}
 	#angel-cover.reveal-full {
 		height: 0%;
 	}
 
-@keyframes fake-reveal {
+@keyframes fake-load {
 	0%,
 	25% {
 		height: 100%;
