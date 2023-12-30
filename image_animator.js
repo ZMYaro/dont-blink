@@ -2,6 +2,8 @@
 
 /** {RegExp} Matches Chrome in the user agent string and pulls out the major version number */
 const UA_TEST = /Chrome\/(\d+)/,
+/** {Number} The first Chrome version after Blink forked from WebKit */
+	MIN_BLINK_VERSION = 28,
 /** {Number} How much of the fake load to always show in milliseconds */
 	MIN_FAKE_LOAD_DURATION = 5000,
 /** {String} Path to the hiding angel image */
@@ -41,7 +43,7 @@ function checkIsBlink() {
 	
 	var chromiumVersion = parseInt(regexResult[1]);
 	
-	if (!chromiumVersion || chromiumVersion < 120) {
+	if (!chromiumVersion || chromiumVersion < MIN_BLINK_VERSION) {
 		return false;
 	}
 	
