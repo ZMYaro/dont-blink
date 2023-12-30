@@ -1,8 +1,10 @@
 'use strict';
 
-/** {RegExp} Matches Chrome in the user agent string and pulls out the major version number */
-const UA_TEST = /Chrome\/(\d+)/,
-/** {Number} The first Chrome version after Blink forked from WebKit */
+/** {RegExp} Matches Chrome/Chromium's user agent string and pulls out the major version number */
+const CHROM_VERSION_REGEX = /Chrome\/(\d+)/,
+/** {RegExp} Matches EdgeHTML Edge's user agent string and pulls out the major version number (Edgium contains “Edg”, not “Edge”) */
+	EDGEHTML_VERSION_REGEX = /Edge\/(\d+)/,
+/** {Number} The first Chrom* version after Blink forked from WebKit */
 	MIN_BLINK_VERSION = 28,
 /** {Number} How much of the fake load to always show in milliseconds */
 	MIN_FAKE_LOAD_DURATION = 5000,
@@ -35,15 +37,16 @@ window.addEventListener('DOMContentLoaded', function () {
  * @returns {Boolean}
  */
 function checkIsBlink() {
-	var regexResult = UA_TEST.exec(navigator.userAgent);
-	
-	if (!regexResult) {
+	var chromRegexResult = CHROM_VERSION_REGEX.exec(navigator.userAgent),
+		edgeRegexResult = EDGEHTML_VERSION_REGEX.exec(navigator.userAgent);
+	if (!chromRegexResult || !!edgeRegexResult) {
+		// If the browser isn't Chromium, or pretends to be Chromium but is actually old Edge, no Blink.
 		return false;
 	}
 	
-	var chromiumVersion = parseInt(regexResult[1]);
-	
+	var chromiumVersion = parseInt(chromRegexResult[1]);
 	if (!chromiumVersion || chromiumVersion < MIN_BLINK_VERSION) {
+		// If it is an old Chromium version, it is WebKit, not (officially) Blink.
 		return false;
 	}
 	
