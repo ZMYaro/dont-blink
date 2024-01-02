@@ -99,3 +99,8 @@ footer {
 		height: 91%;
 	}
 }
+
+noscript {
+	position: absolute;
+	z-index: 3;
+}
